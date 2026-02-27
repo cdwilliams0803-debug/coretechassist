@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Core Tech Assist | Pricing</title>
+  <link rel="icon" href="Web_250x150.png" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Mobile-Specific Tweaks */
+    @media (max-width: 768px) {
+      .grid-3, .grid-2 {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .section-title {
+        font-size: 1.8rem !important;
+      }
+      .card {
+        padding: 1.5rem !important;
+      }
+      .price {
+        font-size: 1.5rem !important;
+      }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJLZNXC5J6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JJLZNXC5J6');
+  </script>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <img src="Web_350x75.png" alt="C Tech Assist logo" />
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Menu">☰</button>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a class="nav-cta" href="index.html#contact">Request Support</a>
+    </nav>
+  </div>
+  <nav class="mobile-nav" style="display:none; padding:20px; background:var(--bg-2);">
+    <a href="index.html" style="display:block; margin-bottom:15px;">Home</a>
+    <a href="services.html" style="display:block; margin-bottom:15px;">Services</a>
+    <a href="pricing.html" class="active" style="display:block; margin-bottom:15px;">Pricing</a>
+    <a href="index.html#contact" class="btn primary">Request Support</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="kicker"><span class="dot"></span>Pricing</div>
+        <h1 class="section-title">Simple, honest pricing</h1>
+        <p class="sub">No mystery meat. <strong>FREE 30-Minute Consultation</strong> for all new clients.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card reveal">
+          <div class="tag">HOME</div>
+          <h3>Computer Repair</h3>
+          <div class="price">$60 <small>Diagnostic</small></div>
+          <ul class="bullets">
+            <li>Virus Removal: $75</li>
+            <li>OS Reinstall: $80</li>
+            <li>System Tune-Up: $65</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="tag">Business</div>
+          <h3>SOHO Support</h3>
+          <div class="price">$75 <small>/ hr</small></div>
+          <ul class="bullets">
+            <li>Network Config: $112+</li>
+            <li>Cybersecurity: $125+</li>
+            <li>NAS Setup: $112+</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="tag">Fastest</div>
+          <h3>Remote Support</h3>
+          <div class="price">Starting $50</div>
+          <ul class="bullets">
+            <li>Diagnostics: $50</li>
+            <li>Remote Virus Fix: $65</li>
+            <li>Software Troubleshooting: $55</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="card soft reveal" style="margin-top:24px;">
+        <h3>Hardware Labor</h3>
+        <p class="small" style="margin-bottom:15px; opacity:0.8;">Labor only. Parts quoted separately.</p>
+        <div class="grid-2">
+          <ul class="bullets">
+            <li>Battery Replacement: $85+</li>
+            <li>SSD Upgrade: $145+</li>
+            <li>LCD Screen: $155+ | OLED: $290+</li>
+          </ul>
+          <ul class="bullets">
+            <li>Micro-Soldering: $200+</li>
+            <li>Data Recovery: $135+</li>
+            <li>Data Backup & Transfer: $60</li>
+            <li>Custom PC Builds: Starts at $150</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div style="margin-bottom: 10px;">
+      <strong>© 2026 Core Tech Assist</strong><br>
+      <span class="small">Mon-Fri 8:00 AM – 4:00 PM</span>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+      <span class="tag">Google Pay</span> <span class="tag">Venmo</span> <span class="tag">CashApp</span> <span class="tag">Cash if Local</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const btn = document.querySelector('.nav-toggle');
+const nav = document.querySelector('.mobile-nav');
+btn.addEventListener('click', () => {
+  nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
