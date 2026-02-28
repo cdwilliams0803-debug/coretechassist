@@ -37,12 +37,16 @@
 </head>
 
 <body>
+
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
-      <img src="Web_350x75.png" alt="C Tech Assist logo" />
+      <!-- UPDATED LOGO -->
+      <img src="https://i.postimg.cc/pmvg3Fmg/v3-1-0.png" alt="Core Tech Assist logo" />
     </a>
+
     <button class="nav-toggle" type="button" aria-label="Menu">☰</button>
+
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
@@ -50,6 +54,7 @@
       <a class="nav-cta" href="index.html#contact">Request Support</a>
     </nav>
   </div>
+
   <nav class="mobile-nav" style="display:none; padding:20px; background:var(--bg-2);">
     <a href="index.html" style="display:block; margin-bottom:15px;">Home</a>
     <a href="services.html" style="display:block; margin-bottom:15px;">Services</a>
@@ -64,7 +69,9 @@
       <div class="section-head reveal">
         <div class="kicker"><span class="dot"></span>Pricing</div>
         <h1 class="section-title">Simple, honest pricing</h1>
-        <p class="sub">No mystery meat. <strong>FREE 30-Minute Consultation</strong> for all new clients.</p>
+        <p class="sub">
+          No mystery meat. <strong>FREE 30-Minute Consultation</strong> for all new clients.
+        </p>
       </div>
 
       <div class="grid-3">
@@ -104,13 +111,17 @@
 
       <div class="card soft reveal" style="margin-top:24px;">
         <h3>Hardware Labor</h3>
-        <p class="small" style="margin-bottom:15px; opacity:0.8;">Labor only. Parts quoted separately.</p>
+        <p class="small" style="margin-bottom:15px; opacity:0.8;">
+          Labor only. Parts quoted separately.
+        </p>
+
         <div class="grid-2">
           <ul class="bullets">
             <li>Battery Replacement: $85+</li>
             <li>SSD Upgrade: $145+</li>
             <li>LCD Screen: $155+ | OLED: $290+</li>
           </ul>
+
           <ul class="bullets">
             <li>Micro-Soldering: $200+</li>
             <li>Data Recovery: $135+</li>
@@ -129,8 +140,12 @@
       <strong>© 2026 Core Tech Assist</strong><br>
       <span class="small">Mon-Fri 8:00 AM – 4:00 PM</span>
     </div>
+
     <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-      <span class="tag">Google Pay</span> <span class="tag">Venmo</span> <span class="tag">CashApp</span> <span class="tag">Cash if Local</span>
+      <span class="tag">Google Pay</span>
+      <span class="tag">Venmo</span>
+      <span class="tag">CashApp</span>
+      <span class="tag">Cash if Local</span>
     </div>
   </div>
 </footer>
@@ -138,6 +153,7 @@
 <script>
 const btn = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.mobile-nav');
+
 btn.addEventListener('click', () => {
   nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
 });
@@ -147,7 +163,9 @@ const observer = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) entry.target.classList.add('is-visible');
   });
 }, { threshold: 0.1 });
+
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
