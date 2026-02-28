@@ -25,9 +25,8 @@
   <meta name="twitter:title" content="Core Tech Assist | Simple Tech. Real Support.">
   <meta name="twitter:description" content="Straightforward IT support for homes and small businesses">
   <meta name="twitter:image" content="https://ctechassist.org/Web_250x150.png">
-  <meta name="twitter:image:alt" content="C Tech Assist Logo">
+  <meta name="twitter:image:alt" content="Core Tech Assist Logo">
 
-  <!-- Then your other resources -->
   <link rel="icon" href="Web_250x150.png" />
   <link rel="stylesheet" href="style.css" />
 
@@ -39,9 +38,346 @@
     gtag('js', new Date());
     gtag('config', 'G-JJLZNXC5J6');
   </script>
+
+  <!-- =====================================================
+       ROBOT SLIDE-IN POPUP (ONLY POPUP)
+       - Bigger avatar
+       - Blink + pulse glow
+       - Hover animation
+       - Maybe later + X
+       ===================================================== -->
+  <style>
+    /* Screen-reader only */
+    .sr-only{
+      position:absolute !important;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+
+    /* ========= ROBOT CTA WRAP ========= */
+    .robot-cta-wrap{
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 3000;
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+
+      transform: translateY(160%);
+      opacity: 0;
+      pointer-events: none;
+
+      transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s cubic-bezier(.2,.8,.2,1);
+      will-change: transform, opacity;
+    }
+
+    .robot-cta-wrap.open{
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Hover: subtle lift */
+    .robot-cta-wrap.open:hover{
+      transform: translateY(-6px);
+    }
+
+    /* ========= BIGGER AVATAR ========= */
+    .robot-avatar{
+      width: 140px;            /* BIGGER */
+      height: 140px;           /* BIGGER */
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+
+      background: #000;
+      border: 3px solid rgba(255,207,74,.70);
+
+      animation: robotPulse 2.6s ease-in-out infinite;
+      box-shadow:
+        0 22px 60px rgba(0,0,0,.62),
+        0 0 28px rgba(245,179,1,.25),
+        0 0 0 1px rgba(245,179,1,.20);
+    }
+
+    .robot-cta-wrap.open:hover .robot-avatar{
+      transform: rotate(-1.4deg);
+      transition: transform .18s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .robot-avatar img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.05); /* tiny zoom so it feels closer */
+    }
+
+    /* Blink overlay */
+    .robot-avatar::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:-110%;
+      height: 120%;
+      background: rgba(0,0,0,.88);
+      pointer-events:none;
+      opacity: 0;
+      animation: robotBlink 5.2s infinite;
+    }
+
+    @keyframes robotPulse{
+      0%, 100%{
+        box-shadow:
+          0 22px 60px rgba(0,0,0,.62),
+          0 0 24px rgba(245,179,1,.22),
+          0 0 0 1px rgba(245,179,1,.20);
+        border-color: rgba(255,207,74,.62);
+      }
+      50%{
+        box-shadow:
+          0 26px 70px rgba(0,0,0,.68),
+          0 0 38px rgba(245,179,1,.34),
+          0 0 0 1px rgba(245,179,1,.26);
+        border-color: rgba(255,207,74,.85);
+      }
+    }
+
+    @keyframes robotBlink{
+      0%, 90% { opacity: 0; transform: translateY(-110%); }
+      91% { opacity: .95; transform: translateY(96%); }
+      92% { opacity: .95; transform: translateY(96%); }
+      93% { opacity: 0; transform: translateY(-110%); }
+      94%, 100% { opacity: 0; transform: translateY(-110%); }
+    }
+
+    /* ========= BUBBLE ========= */
+    .robot-bubble{
+      width: min(460px, calc(100vw - 190px)); /* wider since avatar is bigger */
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      position: relative;
+
+      background:
+        radial-gradient(360px 200px at 15% 0%, rgba(255,207,74,.16), transparent 60%),
+        radial-gradient(300px 190px at 100% 40%, rgba(255,255,255,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        #000;
+
+      border: 1px solid rgba(245,179,1,.78);
+      animation: bubblePulse 2.6s ease-in-out infinite;
+
+      box-shadow:
+        0 26px 84px rgba(0,0,0,.70),
+        0 0 22px rgba(245,179,1,.18);
+      color: #fff;
+    }
+
+    .robot-cta-wrap.open:hover .robot-bubble{
+      box-shadow:
+        0 30px 92px rgba(0,0,0,.74),
+        0 0 34px rgba(245,179,1,.22);
+    }
+
+    @keyframes bubblePulse{
+      0%, 100%{
+        border-color: rgba(245,179,1,.66);
+        box-shadow:
+          0 26px 84px rgba(0,0,0,.70),
+          0 0 20px rgba(245,179,1,.16);
+      }
+      50%{
+        border-color: rgba(245,179,1,.90);
+        box-shadow:
+          0 28px 88px rgba(0,0,0,.72),
+          0 0 30px rgba(245,179,1,.22);
+      }
+    }
+
+    /* Tail */
+    .robot-bubble::before{
+      content:"";
+      position:absolute;
+      left:-12px;
+      bottom: 22px;
+      width: 0; height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-right: 12px solid rgba(245,179,1,.78);
+    }
+    .robot-bubble::after{
+      content:"";
+      position:absolute;
+      left:-11px;
+      bottom: 22px;
+      width: 0; height: 0;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      border-right: 11px solid #000;
+    }
+
+    /* Close button */
+    .robot-close{
+      position:absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.92);
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      transition: transform .16s cubic-bezier(.2,.8,.2,1), background .16s cubic-bezier(.2,.8,.2,1);
+    }
+    .robot-close:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+    }
+
+    .robot-bubble h3{
+      margin: 0 44px 8px 0;
+      font-size: 1.15rem;
+      letter-spacing: .1px;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    .robot-bubble p{
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.78);
+      font-size: .95rem;
+      line-height: 1.35;
+    }
+
+    .robot-bubble strong{ color: #ffcf4a; }
+
+    .robot-bubble form{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .robot-bubble input[type="email"]{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      transition: border-color .16s cubic-bezier(.2,.8,.2,1), box-shadow .16s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .robot-bubble input[type="email"]::placeholder{
+      color: rgba(255,255,255,.45);
+    }
+
+    .robot-bubble input[type="email"]:focus{
+      outline: none;
+      border-color: rgba(255,207,74,.82);
+      box-shadow: 0 0 0 4px rgba(245,179,1,.18);
+    }
+
+    .robot-bubble button[type="submit"]{
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 850;
+      color: #0f172a;
+      background: linear-gradient(135deg, #f5b301, #ffcf4a);
+      box-shadow: 0 14px 34px rgba(245,179,1,.22);
+      transition: transform .16s cubic-bezier(.2,.8,.2,1), box-shadow .16s cubic-bezier(.2,.8,.2,1);
+      width: auto;
+    }
+
+    .robot-bubble button[type="submit"]:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(245,179,1,.30);
+    }
+
+    .robot-actions{
+      display:flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .robot-later{
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.80);
+      padding: 9px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: .9rem;
+      transition: transform .16s cubic-bezier(.2,.8,.2,1), background .16s cubic-bezier(.2,.8,.2,1), border-color .16s cubic-bezier(.2,.8,.2,1);
+    }
+    .robot-later:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.05);
+      border-color: rgba(245,179,1,.30);
+    }
+
+    .robot-status{
+      margin: 10px 0 0;
+      font-size: .9rem;
+      color: rgba(255,255,255,.75);
+      min-height: 1.2em;
+    }
+
+    /* Mobile: keep robot BIG but not overwhelming */
+    @media (max-width: 520px){
+      .robot-cta-wrap{
+        left: 10px;
+        bottom: 10px;
+        gap: 10px;
+      }
+
+      .robot-avatar{
+        width: 118px;
+        height: 118px;
+      }
+
+      .robot-bubble{
+        width: min(92vw, 520px);
+      }
+
+      .robot-bubble form{
+        grid-template-columns: 1fr;
+      }
+
+      .robot-bubble button[type="submit"]{
+        width: 100%;
+      }
+
+      .robot-actions{
+        justify-content: stretch;
+      }
+
+      .robot-later{
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .robot-avatar, .robot-bubble{ animation: none; }
+      .robot-cta-wrap{ transition: none; }
+      .robot-avatar::after{ animation: none; }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- (kept, since you didn’t ask to remove it in this request) -->
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -81,7 +417,7 @@
           <div class="kicker"><span class="dot"></span>Local-minded support • Remote-friendly</div>
           <h1>Tech help that feels human and actually sticks.</h1>
           <p class="lead">
-            we fix the stuff that wastes your time: slow computers, unstable Wi-Fi, "why won’t it print,"
+            I fix the stuff that wastes your time: slow computers, unstable Wi-Fi, "why won’t it print,"
             and websites that look fine on desktop but break on phones.
           </p>
 
@@ -200,7 +536,7 @@
           <article class="card soft reveal">
             <div class="tag">3 • Fix + explain</div>
             <h3>Resolve + prevent</h3>
-            <p>We fix the issue and show you how to avoid the same trap next week.</p>
+            <p>I fix the issue and show you how to avoid the same trap next week.</p>
           </article>
         </div>
       </div>
@@ -322,7 +658,7 @@
                 <input id="agree" type="checkbox" name="agree" />
                 <span>
                   I have read and agree to the
-                  <a href="https://drive.google.com/file/d/1TXHd5fAxuVgmWES6XYKzrRDwUdB5b0uX/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                  <a href="https://pub-a468b6ba9d35419ebd9f52ae82e2feae.r2.dev/C_Tech_Assist_IT_Service_Agreement_FINAL_OVERLAY.pdf" target="_blank" rel="noopener noreferrer">
                     C Tech Assist Service Agreement
                   </a>.
                 </span>
@@ -343,50 +679,46 @@
   </main>
 
   <!-- =====================================================
-       Mailing List Popup Modal (shows after 5s on first visit)
-       - Uses display:none -> display:flex (reliable)
-       - Maybe later: closes for this session only
-       - Subscribe: posts to your existing Formspree
+       ONLY POPUP: ROBOT SLIDE-IN
        ===================================================== -->
-  <div id="newsletter-modal" class="newsletter-modal" aria-hidden="true">
-    <div class="newsletter-box" role="dialog" aria-modal="true" aria-labelledby="newsletterTitle">
-      <button type="button" class="newsletter-x" aria-label="Close" onclick="closeNewsletter()">×</button>
+  <div id="robotCtaWrap" class="robot-cta-wrap" style="display:none;" aria-live="polite">
+    <div class="robot-avatar" aria-hidden="true">
+      <img
+        src="https://i.postimg.cc/pL6V4xtH/4a122d7e-eebc-4be8-813f-ebd9f52b3461-(2).png"
+        alt=""
+        loading="lazy"
+      />
+    </div>
 
-      <div class="newsletter-kicker">
-        <span class="newsletter-dot" aria-hidden="true"></span>
-        Join the family
-      </div>
+    <div class="robot-bubble" role="dialog" aria-modal="false" aria-labelledby="robotTitle" aria-describedby="robotBody">
+      <button class="robot-close" type="button" aria-label="Close" onclick="closeRobotCTA()">×</button>
 
-      <h2 id="newsletterTitle" class="newsletter-title">Get 10% off</h2>
-
-      <p class="newsletter-text">
-        Join the Core Techs family mailing list! Leave your email to receive a <strong>10% off coupon</strong>
-        for future services or a refurbished item purchase.
+      <h3 id="robotTitle">Join the Core Tech Family!</h3>
+      <p id="robotBody">
+        Sign up for our mailing list and get <strong>10% off</strong> any new service or a refurbished item purchase.
       </p>
 
-      <form id="newsletterForm" class="newsletter-form" action="https://formspree.io/f/xeeeqkew" method="POST">
+      <form id="robotForm" action="https://formspree.io/f/xeeeqkew" method="POST">
+        <label class="sr-only" for="robotEmail">Email address</label>
         <input
           type="email"
           name="email"
-          id="newsletterEmail"
+          id="robotEmail"
           placeholder="you@example.com"
           required
           autocomplete="email"
           inputmode="email"
         />
-
-        <input type="hidden" name="source" value="Mailing List Popup" />
-        <input type="hidden" name="_subject" value="New Mailing List Signup (10% Coupon)" />
-        <input type="hidden" name="offer" value="10% off services or refurbished item purchase" />
-
-        <button type="submit" class="newsletter-btn">Subscribe</button>
+        <input type="hidden" name="source" value="Robot Slide-In Popup" />
+        <input type="hidden" name="_subject" value="New Mailing List Signup (Robot Popup)" />
+        <button type="submit">Subscribe</button>
       </form>
 
-      <div class="newsletter-actions">
-        <button type="button" class="newsletter-later" onclick="closeNewsletter()">Maybe later</button>
+      <div class="robot-actions">
+        <button type="button" class="robot-later" onclick="closeRobotCTA(true)">Maybe later</button>
       </div>
 
-      <p id="newsletterStatus" class="newsletter-status" aria-live="polite"></p>
+      <p id="robotStatus" class="robot-status" aria-live="polite"></p>
     </div>
   </div>
 
@@ -461,7 +793,7 @@
       });
     })();
 
-    /* Scroll reveal (subtle, avoids gimmicks) */
+    /* Scroll reveal */
     (function(){
       const els = Array.from(document.querySelectorAll('.reveal'));
       if(!('IntersectionObserver' in window) || els.length===0) {
@@ -480,100 +812,93 @@
     })();
 
     /* =====================================================
-       Newsletter popup behavior (works like your example)
-       - show after 5 seconds
-       - "Maybe later"/X closes for this session only
-       - if subscribed successfully: never show again
+       Robot Slide-In Popup behavior (ONLY POPUP)
+       - show after 3 seconds
+       - Maybe later / X closes for this session
+       - Subscribe stores localStorage so it never shows again
        ===================================================== */
-    function closeNewsletter(){
-      const modal = document.getElementById('newsletter-modal');
-      if(modal) modal.style.display = 'none';
-      try { sessionStorage.setItem('newsletterClosed', 'true'); } catch(e) {}
+    function closeRobotCTA(){
+      const wrap = document.getElementById('robotCtaWrap');
+      if(!wrap) return;
+
+      wrap.classList.remove('open');
+
+      try { sessionStorage.setItem('robotClosed_session_v1', 'true'); } catch(e) {}
+
+      setTimeout(()=> { wrap.style.display = 'none'; }, 350);
     }
 
     document.addEventListener('DOMContentLoaded', function(){
-      const modal = document.getElementById('newsletter-modal');
-      const form = document.getElementById('newsletterForm');
-      const email = document.getElementById('newsletterEmail');
-      const status = document.getElementById('newsletterStatus');
+      const wrap = document.getElementById('robotCtaWrap');
+      const form = document.getElementById('robotForm');
+      const email = document.getElementById('robotEmail');
+      const status = document.getElementById('robotStatus');
 
-      if(!modal) return;
+      if(!wrap || !form) return;
 
-      const SUBSCRIBED_KEY = 'newsletterSubscribed_v1';
+      const SUB_KEY = 'robotSubscribed_v1';
+      const CLOSED_SESSION_KEY = 'robotClosed_session_v1';
 
       function isSubscribed(){
-        try { return localStorage.getItem(SUBSCRIBED_KEY) === 'true'; } catch(e){ return false; }
+        try { return localStorage.getItem(SUB_KEY) === 'true'; } catch(e){ return false; }
       }
-
       function setSubscribed(){
-        try { localStorage.setItem(SUBSCRIBED_KEY, 'true'); } catch(e){}
+        try { localStorage.setItem(SUB_KEY, 'true'); } catch(e){}
+      }
+      function wasClosedThisSession(){
+        try { return sessionStorage.getItem(CLOSED_SESSION_KEY) === 'true'; } catch(e){ return false; }
       }
 
       // start hidden
-      modal.style.display = 'none';
+      wrap.style.display = 'none';
 
-      // show after 5 seconds if not closed this session and not subscribed
-      setTimeout(function(){
-        let closed = false;
-        try { closed = sessionStorage.getItem('newsletterClosed') === 'true'; } catch(e){}
-        if(!closed && !isSubscribed()){
-          modal.style.display = 'flex';
-          modal.setAttribute('aria-hidden', 'false');
-          setTimeout(()=> { if(email) email.focus(); }, 50);
-        }
-      }, 5000);
-
-      // click outside closes
-      modal.addEventListener('click', function(e){
-        if(e.target === modal) closeNewsletter();
-      });
-
-      // escape closes
-      window.addEventListener('keydown', function(e){
-        if(e.key === 'Escape' && modal.style.display === 'flex') closeNewsletter();
-      });
-
-      // submit via fetch to Formspree (no page redirect)
-      if(form){
-        form.addEventListener('submit', async function(e){
-          e.preventDefault();
-          if(status) status.textContent = '';
-
-          const val = (email && email.value) ? email.value.trim() : '';
-          const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-          if(!ok){
-            if(status) status.textContent = 'Please enter a valid email address.';
-            if(email) email.focus();
-            return;
-          }
-
-          const btn = form.querySelector('button[type="submit"]');
-          const oldText = btn ? btn.textContent : '';
-          if(btn){ btn.disabled = true; btn.textContent = 'Submitting…'; }
-
-          try{
-            const res = await fetch(form.action, {
-              method: 'POST',
-              headers: { 'Accept': 'application/json' },
-              body: new FormData(form)
-            });
-
-            if(res.ok){
-              if(status) status.textContent = 'Thanks! Check your inbox for your 10% coupon.';
-              setSubscribed();
-              try { sessionStorage.setItem('newsletterClosed', 'true'); } catch(e){}
-              form.reset();
-              setTimeout(closeNewsletter, 1400);
-            } else {
-              if(status) status.textContent = 'Something went wrong. Please try again.';
-            }
-          } catch(err){
-            if(status) status.textContent = 'Network error. Please try again.';
-          } finally {
-            if(btn){ btn.disabled = false; btn.textContent = oldText; }
-          }
-        });
+      // show after 3s if allowed
+      if(!isSubscribed() && !wasClosedThisSession()){
+        setTimeout(function(){
+          wrap.style.display = 'flex';
+          requestAnimationFrame(()=> wrap.classList.add('open'));
+        }, 3000);
       }
+
+      // submit without redirect
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        if(status) status.textContent = '';
+
+        const val = (email && email.value) ? email.value.trim() : '';
+        const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        if(!ok){
+          if(status) status.textContent = 'Please enter a valid email address.';
+          if(email) email.focus();
+          return;
+        }
+
+        const btn = form.querySelector('button[type="submit"]');
+        const oldText = btn ? btn.textContent : '';
+        if(btn){ btn.disabled = true; btn.textContent = 'Submitting…'; }
+
+        try{
+          const res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+          });
+
+          if(res.ok){
+            if(status) status.textContent = 'Thanks! Check your inbox for your 10% coupon.';
+            setSubscribed();
+            try { sessionStorage.setItem(CLOSED_SESSION_KEY, 'true'); } catch(e){}
+            form.reset();
+            setTimeout(()=> closeRobotCTA(), 1400);
+          } else {
+            if(status) status.textContent = 'Something went wrong. Please try again.';
+          }
+        } catch(err){
+          if(status) status.textContent = 'Network error. Please try again.';
+        } finally {
+          if(btn){ btn.disabled = false; btn.textContent = oldText; }
+        }
+      });
     });
   </script>
 
