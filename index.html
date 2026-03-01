@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://ctechassist.org/Web_250x150.png">
   <meta property="og:image:width" content="250">
   <meta property="og:image:height" content="150">
-  <meta property="og:image:alt" content="C Tech Assist Logo">
+  <meta property="og:image:alt" content="Core Tech Assist Logo">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
@@ -29,6 +29,70 @@
 
   <link rel="icon" href="Web_250x150.png" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Brand overrides (amber/black) + HERO background robot watermark -->
+  <style>
+    :root{
+      --accent:#ff8c00;
+      --accent-2:#ffb347;
+      --accent-glow:#ff6a00;
+      --bg:#050607;
+    }
+
+    body{
+      background:
+        radial-gradient(900px 500px at 85% 15%, rgba(255,140,0,.08), transparent 60%),
+        radial-gradient(1000px 700px at 50% 100%, rgba(255,106,0,.06), transparent 70%),
+        var(--bg);
+    }
+
+    /* HERO: put transparent robot BEHIND the kicker area (Local-minded support...) */
+    .hero-card{
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      left: -10px;
+      top: -16px;
+      width: 630px;
+      height: 630px;
+
+      background-image: url("https://i.postimg.cc/63gq0kN3/robot-transparent.png");
+      background-repeat:no-repeat;
+      background-size:contain;
+      background-position:center;
+
+      opacity:.14;              /* transparency level */
+      pointer-events:none;
+      z-index:0;
+
+      animation: heroRobotFloat 8.5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .hero-card > *{
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes heroRobotFloat{
+      0%,100%{ transform: translateY(0) translateX(0) rotate(0deg); }
+      50%{ transform: translateY(12px) translateX(6px) rotate(-0.6deg); }
+    }
+
+    @media (max-width: 520px){
+      .hero-card::after{
+        width:180px;
+        height:180px;
+        left:-10px;
+        top:-12px;
+        opacity:.11;
+      }
+    }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJLZNXC5J6"></script>
@@ -41,10 +105,9 @@
 
   <!-- =====================================================
        ROBOT SLIDE-IN POPUP (ONLY POPUP)
-       - Bigger avatar
-       - Blink + pulse glow
-       - Hover animation
-       - Maybe later + X
+       - Small premium circle
+       - No blink
+       - Same behavior + logic
        ===================================================== -->
   <style>
     /* Screen-reader only */
@@ -85,116 +148,71 @@
       transform: translateY(-6px);
     }
 
-    /* ========= BIGGER AVATAR ========= */
+    /* ========= PREMIUM SMALL AVATAR ========= */
     .robot-avatar{
-      width: 140px;            /* BIGGER */
-      height: 140px;           /* BIGGER */
+      width: 88px;                 /* smaller circle */
+      height: 88px;
       border-radius: 999px;
       overflow: hidden;
       position: relative;
+      padding: 8px;
 
-      background: #000;
-      border: 3px solid rgba(255,207,74,.70);
+      background: radial-gradient(80px 80px at 35% 30%, rgba(255,140,0,.18), rgba(0,0,0,.92));
+      border: 2px solid rgba(255,140,0,.70);
 
-      animation: robotPulse 2.6s ease-in-out infinite;
       box-shadow:
-        0 22px 60px rgba(0,0,0,.62),
-        0 0 28px rgba(245,179,1,.25),
-        0 0 0 1px rgba(245,179,1,.20);
-    }
+        0 16px 40px rgba(0,0,0,.55),
+        0 0 18px rgba(255,140,0,.22),
+        0 0 0 1px rgba(255,140,0,.16);
 
-    .robot-cta-wrap.open:hover .robot-avatar{
-      transform: rotate(-1.4deg);
-      transition: transform .18s cubic-bezier(.2,.8,.2,1);
+      animation: robotGlow 3.2s ease-in-out infinite;
     }
 
     .robot-avatar img{
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;          /* keeps it clean */
       display: block;
-      transform: scale(1.05); /* tiny zoom so it feels closer */
+      transform: none;
+      filter: brightness(1.12) contrast(1.08);
     }
 
-    /* Blink overlay */
-    .robot-avatar::after{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      top:-110%;
-      height: 120%;
-      background: rgba(0,0,0,.88);
-      pointer-events:none;
-      opacity: 0;
-      animation: robotBlink 5.2s infinite;
-    }
-
-    @keyframes robotPulse{
-      0%, 100%{
+    @keyframes robotGlow{
+      0%,100%{
         box-shadow:
-          0 22px 60px rgba(0,0,0,.62),
-          0 0 24px rgba(245,179,1,.22),
-          0 0 0 1px rgba(245,179,1,.20);
-        border-color: rgba(255,207,74,.62);
+          0 16px 40px rgba(0,0,0,.55),
+          0 0 16px rgba(255,140,0,.18),
+          0 0 0 1px rgba(255,140,0,.14);
+        border-color: rgba(255,140,0,.62);
       }
       50%{
         box-shadow:
-          0 26px 70px rgba(0,0,0,.68),
-          0 0 38px rgba(245,179,1,.34),
-          0 0 0 1px rgba(245,179,1,.26);
-        border-color: rgba(255,207,74,.85);
+          0 18px 44px rgba(0,0,0,.60),
+          0 0 22px rgba(255,140,0,.26),
+          0 0 0 1px rgba(255,140,0,.18);
+        border-color: rgba(255,140,0,.82);
       }
-    }
-
-    @keyframes robotBlink{
-      0%, 90% { opacity: 0; transform: translateY(-110%); }
-      91% { opacity: .95; transform: translateY(96%); }
-      92% { opacity: .95; transform: translateY(96%); }
-      93% { opacity: 0; transform: translateY(-110%); }
-      94%, 100% { opacity: 0; transform: translateY(-110%); }
     }
 
     /* ========= BUBBLE ========= */
     .robot-bubble{
-      width: min(460px, calc(100vw - 190px)); /* wider since avatar is bigger */
+      width: min(420px, calc(100vw - 140px)); /* tuned for smaller avatar */
       border-radius: 18px;
       padding: 16px 16px 14px;
       position: relative;
 
       background:
-        radial-gradient(360px 200px at 15% 0%, rgba(255,207,74,.16), transparent 60%),
+        radial-gradient(360px 200px at 15% 0%, rgba(255,140,0,.16), transparent 60%),
         radial-gradient(300px 190px at 100% 40%, rgba(255,255,255,.10), transparent 55%),
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
         #000;
 
-      border: 1px solid rgba(245,179,1,.78);
-      animation: bubblePulse 2.6s ease-in-out infinite;
+      border: 1px solid rgba(255,140,0,.70);
 
       box-shadow:
         0 26px 84px rgba(0,0,0,.70),
-        0 0 22px rgba(245,179,1,.18);
+        0 0 22px rgba(255,140,0,.16);
       color: #fff;
-    }
-
-    .robot-cta-wrap.open:hover .robot-bubble{
-      box-shadow:
-        0 30px 92px rgba(0,0,0,.74),
-        0 0 34px rgba(245,179,1,.22);
-    }
-
-    @keyframes bubblePulse{
-      0%, 100%{
-        border-color: rgba(245,179,1,.66);
-        box-shadow:
-          0 26px 84px rgba(0,0,0,.70),
-          0 0 20px rgba(245,179,1,.16);
-      }
-      50%{
-        border-color: rgba(245,179,1,.90);
-        box-shadow:
-          0 28px 88px rgba(0,0,0,.72),
-          0 0 30px rgba(245,179,1,.22);
-      }
     }
 
     /* Tail */
@@ -206,7 +224,7 @@
       width: 0; height: 0;
       border-top: 12px solid transparent;
       border-bottom: 12px solid transparent;
-      border-right: 12px solid rgba(245,179,1,.78);
+      border-right: 12px solid rgba(255,140,0,.70);
     }
     .robot-bubble::after{
       content:"";
@@ -255,7 +273,7 @@
       line-height: 1.35;
     }
 
-    .robot-bubble strong{ color: #ffcf4a; }
+    .robot-bubble strong{ color: var(--accent-2); }
 
     .robot-bubble form{
       display: grid;
@@ -281,8 +299,8 @@
 
     .robot-bubble input[type="email"]:focus{
       outline: none;
-      border-color: rgba(255,207,74,.82);
-      box-shadow: 0 0 0 4px rgba(245,179,1,.18);
+      border-color: rgba(255,140,0,.82);
+      box-shadow: 0 0 0 4px rgba(255,140,0,.18);
     }
 
     .robot-bubble button[type="submit"]{
@@ -292,15 +310,15 @@
       cursor: pointer;
       font-weight: 850;
       color: #0f172a;
-      background: linear-gradient(135deg, #f5b301, #ffcf4a);
-      box-shadow: 0 14px 34px rgba(245,179,1,.22);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 14px 34px rgba(255,140,0,.18);
       transition: transform .16s cubic-bezier(.2,.8,.2,1), box-shadow .16s cubic-bezier(.2,.8,.2,1);
       width: auto;
     }
 
     .robot-bubble button[type="submit"]:hover{
       transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(245,179,1,.30);
+      box-shadow: 0 18px 40px rgba(255,140,0,.26);
     }
 
     .robot-actions{
@@ -322,7 +340,7 @@
     .robot-later:hover{
       transform: translateY(-1px);
       background: rgba(255,255,255,.05);
-      border-color: rgba(245,179,1,.30);
+      border-color: rgba(255,140,0,.30);
     }
 
     .robot-status{
@@ -332,58 +350,28 @@
       min-height: 1.2em;
     }
 
-    /* Mobile: keep robot BIG but not overwhelming */
     @media (max-width: 520px){
-      .robot-cta-wrap{
-        left: 10px;
-        bottom: 10px;
-        gap: 10px;
-      }
-
-      .robot-avatar{
-        width: 118px;
-        height: 118px;
-      }
-
-      .robot-bubble{
-        width: min(92vw, 520px);
-      }
-
-      .robot-bubble form{
-        grid-template-columns: 1fr;
-      }
-
-      .robot-bubble button[type="submit"]{
-        width: 100%;
-      }
-
-      .robot-actions{
-        justify-content: stretch;
-      }
-
-      .robot-later{
-        width: 100%;
-        text-align: center;
-      }
+      .robot-cta-wrap{ left: 10px; bottom: 10px; gap: 10px; }
+      .robot-avatar{ width: 82px; height: 82px; padding: 7px; }
+      .robot-bubble{ width: min(92vw, 520px); }
+      .robot-bubble form{ grid-template-columns: 1fr; }
+      .robot-bubble button[type="submit"]{ width: 100%; }
+      .robot-actions{ justify-content: stretch; }
+      .robot-later{ width: 100%; text-align: center; }
     }
 
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
-      .robot-avatar, .robot-bubble{ animation: none; }
+      .robot-avatar{ animation: none; }
       .robot-cta-wrap{ transition: none; }
-      .robot-avatar::after{ animation: none; }
     }
   </style>
 </head>
 
 <body>
-  <!-- (kept, since you didn’t ask to remove it in this request) -->
-  <a class="skip-link" href="#main">Skip to content</a>
-
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.html" aria-label="Core Tech Assist home">
-        <img src="https://i.postimg.cc/T35fLjfY/v3-1-0.png" alt="Core Tech Assist logo" />
+        <img src="https://i.postimg.cc/CKMHbgmD/33a60556-f477-4da1-a492-a7239339ab14.png" alt="Core Tech Assist logo" />
         <div class="brand-text" aria-hidden="true">
           <div class="brand-name">Core Tech Assist ✊🏿 Black &amp; Trans Owned | LGBTQ+ Friendly </div>
           <div class="brand-tag">Simple Tech. Real Support.</div>
@@ -439,7 +427,7 @@
             <span class="pill">Home + small business</span>
           </div>
 
-          <div class="circuit" aria-hidden="true"></div>
+          <!-- Removed: the big hero-robot image (replaced by subtle background robot watermark) -->
         </div>
 
         <aside class="hero-card hero-side reveal">
@@ -466,6 +454,9 @@
         </aside>
       </div>
     </section>
+
+    <!-- (Everything else below is unchanged from your file) -->
+    <!-- Services, How it works, Contact sections... -->
 
     <section class="section tight">
       <div class="wrap">
@@ -659,7 +650,7 @@
                 <span>
                   I have read and agree to the
                   <a href="https://pub-a468b6ba9d35419ebd9f52ae82e2feae.r2.dev/C_Tech_Assist_IT_Service_Agreement_FINAL_OVERLAY.pdf" target="_blank" rel="noopener noreferrer">
-                    C Tech Assist Service Agreement
+                    Core Tech Assist Service Agreement
                   </a>.
                 </span>
               </label>
@@ -684,7 +675,7 @@
   <div id="robotCtaWrap" class="robot-cta-wrap" style="display:none;" aria-live="polite">
     <div class="robot-avatar" aria-hidden="true">
       <img
-        src="https://i.postimg.cc/pL6V4xtH/4a122d7e-eebc-4be8-813f-ebd9f52b3461-(2).png"
+        src="https://i.postimg.cc/59HWWH8w/Favicon.png"
         alt=""
         loading="lazy"
       />
