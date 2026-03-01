@@ -1,39 +1,39 @@
 /* =========================================================
    CORE TECH ASSIST - style.css (COMPLETE + UPDATED)
    =========================================================
-   Includes:
-   - Your full CSS (as provided)
-   - Compatibility patch for: .grid-1, .form-row, .checkbox
-   - Recommended logo size update (brand img height: 60px)
+   Updated to:
+   - Brand colors: amber/orange + black (no blue)
+   - Remove skip-link styles (since skip link removed in HTML)
+   - Remove floating circuit animation CSS (replaced by hero robot image)
+   - Add .hero-robot styling
+   - Update newsletter accents (no blue)
    ========================================================= */
 
 
 /* =========================================================
    1) DESIGN TOKENS
-   ---------------------------------------------------------
-   Edit these variables to change the brand look globally.
    ========================================================= */
 :root{
-  /* Background surfaces */
-  --bg: #070a0f;
-  --bg-2:#0b1220;
+  /* Background surfaces (deeper brand blacks) */
+  --bg: #050607;
+  --bg-2:#0b0d10;
 
   /* Panels and cards */
-  --panel:#0f172a;
-  --panel-2:#111c35;
+  --panel:#0f1115;
+  --panel-2:#141821;
 
   /* Text */
-  --text:#e5e7eb;
-  --muted:#a7b0c0;
-  --muted-2:#7b8598;
+  --text:#f3f4f6;
+  --muted:#b0b6c2;
+  --muted-2:#7f8896;
 
   /* Borders */
-  --border: rgba(255,255,255,.08);
+  --border: rgba(255,140,0,.14);
 
-  /* Brand accents */
-  --accent:#f5b301;      /* amber */
-  --accent-2:#ffcf4a;    /* brighter amber */
-  --accent-cool:#60a5fa; /* cool highlight */
+  /* Brand accents (molten amber) */
+  --accent:#ff8c00;
+  --accent-2:#ffb347;
+  --accent-glow:#ff6a00;
 
   /* Shadows */
   --shadow: 0 18px 50px rgba(0,0,0,.55);
@@ -59,11 +59,11 @@ body{
   margin:0;
   color:var(--text);
 
-  /* Background glow system */
-  background: radial-gradient(1200px 600px at 10% 0%, rgba(96,165,250,.10), transparent 55%),
-              radial-gradient(900px 500px at 90% 15%, rgba(245,179,1,.10), transparent 55%),
-              radial-gradient(1000px 700px at 50% 100%, rgba(245,179,1,.06), transparent 60%),
-              var(--bg);
+  /* Background glow system (brand amber only) */
+  background:
+    radial-gradient(900px 500px at 90% 15%, rgba(255,140,0,.10), transparent 55%),
+    radial-gradient(1000px 700px at 50% 100%, rgba(255,106,0,.07), transparent 60%),
+    var(--bg);
 
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
   line-height:1.6;
@@ -73,7 +73,7 @@ img{ max-width:100%; height:auto; display:block; }
 a{ color:inherit; text-decoration:none; }
 button,input,select,textarea{ font:inherit; color:inherit; }
 
-::selection{ background: rgba(245,179,1,.28); }
+::selection{ background: rgba(255,140,0,.28); }
 
 
 /* =========================================================
@@ -81,7 +81,11 @@ button,input,select,textarea{ font:inherit; color:inherit; }
    ========================================================= */
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  *{
+    animation-duration:0.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.001ms !important;
+  }
 }
 
 
@@ -119,7 +123,7 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 
 
 /* =========================================================
-   5) KICKER (Small heading line with dot)
+   5) KICKER
    ========================================================= */
 .kicker{
   display:inline-flex;
@@ -134,33 +138,23 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 
 .kicker .dot{
   width:8px;height:8px;border-radius:99px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-cool));
-  box-shadow: 0 0 0 6px rgba(245,179,1,.10);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 0 6px rgba(255,140,0,.10);
 }
 
 
 /* =========================================================
    6) HEADER / NAV
    ========================================================= */
-.skip-link{
-  position:absolute;
-  top:-42px; left: 16px;
-  background: rgba(15,23,42,.92);
-  border:1px solid var(--border);
-  padding:10px 12px;
-  border-radius: 12px;
-  z-index: 9999;
-  transition: top .18s var(--ease);
-}
-.skip-link:focus{ top: 12px; outline: none; box-shadow: 0 0 0 4px rgba(96,165,250,.25); }
+/* skip-link removed (you removed it from index.html) */
 
 .site-header{
   position: sticky;
   top: 0;
   z-index: 1100;
-  background: rgba(7,10,15,.62);
+  background: rgba(0,0,0,.62);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,140,0,.12);
 }
 
 .header-inner{
@@ -178,7 +172,6 @@ button,input,select,textarea{ font:inherit; color:inherit; }
   min-width: 220px;
 }
 
-/* Logo size (you set to 75px currently) */
 .brand img{
   height: 75px;
   width:auto;
@@ -213,13 +206,13 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 .nav a:hover{ background: rgba(255,255,255,.04); transform: translateY(-1px); }
 
 .nav a.active{
-  background: rgba(245,179,1,.12);
+  background: rgba(255,140,0,.12);
   color: var(--accent-2);
 }
 
 .nav-cta{
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #0f172a !important;
+  color: #000 !important;
   font-weight: 700;
   padding: 9px 16px !important;
   border-radius: 12px;
@@ -228,7 +221,7 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 
 .nav-cta:hover{
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(245,179,1,.35);
+  box-shadow: 0 10px 24px rgba(255,140,0,.35);
 }
 
 .nav-toggle{
@@ -295,12 +288,13 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 }
 
 .hero-card{
-  background: linear-gradient(135deg, rgba(15,23,42,.85), rgba(17,28,53,.75));
+  background: linear-gradient(135deg, rgba(15,17,21,.85), rgba(20,24,33,.78));
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 32px;
   box-shadow: var(--shadow);
   position: relative;
+  overflow: hidden; /* ensures robot doesn't spill ugly */
 }
 
 .hero-card h1{
@@ -341,26 +335,42 @@ button,input,select,textarea{ font:inherit; color:inherit; }
   color: var(--muted);
 }
 
-/* Circuit animation */
-.circuit{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 280px;
-  height: 280px;
-  opacity: .15;
-  background: 
-    linear-gradient(90deg, transparent 48%, var(--accent) 48%, var(--accent) 52%, transparent 52%),
-    linear-gradient(0deg, transparent 48%, var(--accent) 48%, var(--accent) 52%, transparent 52%);
-  background-size: 40px 40px;
-  animation: circuitScan 3s ease-in-out infinite;
-  pointer-events: none;
+/* ✅ NEW: hero robot image (replaces circuit) */
+.hero-robot{
+  position:absolute;
+  right:-10px;
+  bottom:-14px;
+  width:300px;
+  max-width:46%;
+  height:auto;
+  opacity:.98;
+  filter: drop-shadow(0 22px 40px rgba(0,0,0,.65));
+  pointer-events:none;
+  user-select:none;
 }
 
-@keyframes circuitScan{
-  0%, 100%{ transform: translate(0, 0); opacity: .15; }
-  50%{ transform: translate(-20px, -20px); opacity: .25; }
+@media (max-width: 900px){
+  .hero-robot{
+    right:-6px;
+    bottom:-10px;
+    width:240px;
+    max-width:52%;
+  }
 }
+
+@media (max-width: 520px){
+  .hero-robot{
+    position:relative;
+    right:auto;
+    bottom:auto;
+    width:220px;
+    max-width:100%;
+    margin-top:18px;
+    margin-left:auto;
+  }
+}
+
+/* ❌ Removed: .circuit and circuit animation (no longer used) */
 
 .hero-side .mini-grid{
   display: grid;
@@ -378,7 +388,7 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 
 .mini-card:hover{
   background: rgba(255,255,255,.04);
-  border-color: rgba(245,179,1,.3);
+  border-color: rgba(255,140,0,.30);
 }
 
 .mini-title{
@@ -411,23 +421,23 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 
 .btn.primary{
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #0f172a;
-  box-shadow: 0 6px 18px rgba(245,179,1,.25);
+  color: #000;
+  box-shadow: 0 6px 18px rgba(255,140,0,.25);
 }
 
 .btn.primary:hover{
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(245,179,1,.4);
+  box-shadow: 0 10px 26px rgba(255,140,0,.40);
 }
 
 .btn.outline{
   background: transparent;
-  border: 1.5px solid rgba(245,179,1,.4);
+  border: 1.5px solid rgba(255,140,0,.40);
   color: var(--accent-2);
 }
 
 .btn.outline:hover{
-  background: rgba(245,179,1,.08);
+  background: rgba(255,140,0,.08);
   border-color: var(--accent-2);
   transform: translateY(-1px);
 }
@@ -435,7 +445,7 @@ button,input,select,textarea{ font:inherit; color:inherit; }
 button[type="submit"]{
   width: 100%;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #0f172a;
+  color: #000;
   padding: 14px 24px;
   border-radius: 12px;
   font-weight: 700;
@@ -446,7 +456,7 @@ button[type="submit"]{
 
 button[type="submit"]:hover:not(:disabled){
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(245,179,1,.4);
+  box-shadow: 0 10px 26px rgba(255,140,0,.40);
 }
 
 button[type="submit"]:disabled{
@@ -475,7 +485,7 @@ button[type="submit"]:disabled{
    10) CARDS / GRIDS
    ========================================================= */
 .card{
-  background: linear-gradient(135deg, rgba(15,23,42,.85), rgba(17,28,53,.75));
+  background: linear-gradient(135deg, rgba(15,17,21,.85), rgba(20,24,33,.78));
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
@@ -486,7 +496,7 @@ button[type="submit"]:disabled{
 .card:hover{
   transform: translateY(-4px);
   box-shadow: var(--shadow);
-  border-color: rgba(245,179,1,.2);
+  border-color: rgba(255,140,0,.24);
 }
 
 .card.soft{
@@ -500,8 +510,8 @@ button[type="submit"]:disabled{
 }
 
 .card.callout{
-  background: linear-gradient(135deg, rgba(96,165,250,.08), rgba(245,179,1,.08));
-  border: 1px solid rgba(245,179,1,.2);
+  background: linear-gradient(135deg, rgba(255,140,0,.10), rgba(255,106,0,.06));
+  border: 1px solid rgba(255,140,0,.22);
 }
 
 .card h3{
@@ -517,7 +527,7 @@ button[type="submit"]:disabled{
 
 .tag{
   display: inline-block;
-  background: rgba(245,179,1,.12);
+  background: rgba(255,140,0,.12);
   color: var(--accent-2);
   padding: 6px 12px;
   border-radius: 8px;
@@ -527,6 +537,7 @@ button[type="submit"]:disabled{
   letter-spacing: .3px;
 }
 
+.grid-1{ display: grid; gap: 20px; grid-template-columns: 1fr; }
 .grid-2{ display: grid; gap: 20px; grid-template-columns: 1fr; }
 .grid-3{ display: grid; gap: 20px; grid-template-columns: 1fr; }
 .grid-4{ display: grid; gap: 20px; grid-template-columns: 1fr; }
@@ -554,13 +565,15 @@ button[type="submit"]:disabled{
   gap: 18px;
 }
 
-.form-group{
+.form-group,
+.form-row{
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.form-group label{
+.form-group label,
+.form-row label{
   font-weight: 600;
   font-size: .95rem;
   display: flex;
@@ -590,7 +603,7 @@ input:focus,
 select:focus,
 textarea:focus{
   outline: none;
-  border-color: rgba(245,179,1,.5);
+  border-color: rgba(255,140,0,.55);
   background: rgba(255,255,255,.06);
 }
 
@@ -600,7 +613,8 @@ textarea{
   font-family: inherit;
 }
 
-.checkbox-group{
+.checkbox-group,
+.checkbox{
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -610,7 +624,8 @@ textarea{
   border-radius: 10px;
 }
 
-.checkbox-group input[type="checkbox"]{
+.checkbox-group input[type="checkbox"],
+.checkbox input[type="checkbox"]{
   margin-top: 4px;
   width: 18px;
   height: 18px;
@@ -618,6 +633,12 @@ textarea{
 }
 
 .checkbox-group label{
+  font-size: .95rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.checkbox span{
   font-size: .95rem;
   cursor: pointer;
   flex: 1;
@@ -685,7 +706,7 @@ textarea{
    15) FOOTER
    ========================================================= */
 .site-footer{
-  background: rgba(11,18,32,.85);
+  background: rgba(0,0,0,.75);
   border-top: 1px solid var(--border);
   padding: 32px 0;
   margin-top: 64px;
@@ -752,66 +773,11 @@ textarea{
 
 
 /* =========================================================
-   18) INDEX.HTML COMPATIBILITY PATCH
-   ---------------------------------------------------------
-   Supports the new index.html classes:
-   - .grid-1
-   - .form-row
-   - .checkbox
-   ========================================================= */
-
-/* Single-column grid */
-.grid-1{
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr;
-}
-
-/* Alias: form-row -> form-group */
-.form-row{
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-row label{
-  font-weight: 600;
-  font-size: .95rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Alias: checkbox -> checkbox-group */
-.checkbox{
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px;
-  background: rgba(255,255,255,.02);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
-.checkbox input[type="checkbox"]{
-  margin-top: 4px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.checkbox span{
-  font-size: .95rem;
-  cursor: pointer;
-  flex: 1;
-}
-
-/* =========================================================
-   19) NEWSLETTER POPUP (Pitch black + orange glow + chrome)
+   19) NEWSLETTER POPUP (Pitch black + amber glow + chrome)
    ========================================================= */
 
 .newsletter-modal{
-  display: none;               /* JS toggles to flex */
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 2500;
@@ -830,14 +796,14 @@ textarea{
   position: relative;
 
   background:
-    radial-gradient(900px 400px at 10% 0%, rgba(255,207,74,.14), transparent 60%),
+    radial-gradient(900px 400px at 10% 0%, rgba(255,140,0,.14), transparent 60%),
     radial-gradient(700px 380px at 90% 30%, rgba(255,255,255,.08), transparent 55%),
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
     #000;
 
   box-shadow:
     0 26px 90px rgba(0,0,0,.75),
-    0 0 0 1px rgba(245,179,1,.10);
+    0 0 0 1px rgba(255,140,0,.10);
 }
 
 .newsletter-box::before{
@@ -846,7 +812,7 @@ textarea{
   inset:-1px;
   border-radius: 18px;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(245,179,1,.60), rgba(255,255,255,.30), rgba(96,165,250,.18));
+  background: linear-gradient(135deg, rgba(255,140,0,.75), rgba(255,179,71,.38), rgba(255,106,0,.30));
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -875,7 +841,7 @@ textarea{
 .newsletter-x:hover{
   transform: translateY(-1px);
   background: rgba(255,255,255,.07);
-  border-color: rgba(245,179,1,.28);
+  border-color: rgba(255,140,0,.28);
 }
 
 .newsletter-kicker{
@@ -893,8 +859,8 @@ textarea{
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-cool));
-  box-shadow: 0 0 0 6px rgba(245,179,1,.10);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 0 6px rgba(255,140,0,.10);
 }
 
 .newsletter-title{
@@ -935,9 +901,9 @@ textarea{
 
 .newsletter-form input[type="email"]:focus{
   outline:none;
-  border-color: rgba(255,207,74,.65);
+  border-color: rgba(255,140,0,.65);
   background: rgba(255,255,255,.06);
-  box-shadow: 0 0 0 4px rgba(245,179,1,.18);
+  box-shadow: 0 0 0 4px rgba(255,140,0,.20);
 }
 
 .newsletter-btn{
@@ -946,15 +912,15 @@ textarea{
   border: none;
   cursor:pointer;
   font-weight: 850;
-  color: #0f172a;
+  color: #000;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 10px 26px rgba(245,179,1,.28);
+  box-shadow: 0 10px 26px rgba(255,140,0,.28);
   transition: transform .16s var(--ease), box-shadow .16s var(--ease);
 }
 
 .newsletter-btn:hover{
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(245,179,1,.38);
+  box-shadow: 0 14px 30px rgba(255,140,0,.38);
 }
 
 .newsletter-actions{
@@ -976,7 +942,7 @@ textarea{
 .newsletter-later:hover{
   transform: translateY(-1px);
   background: rgba(255,255,255,.05);
-  border-color: rgba(245,179,1,.28);
+  border-color: rgba(255,140,0,.28);
 }
 
 .newsletter-status{
